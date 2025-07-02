@@ -480,11 +480,10 @@ body {
 }
 
 .nav-link {
-  color: var(--text-secondary);
+  color: var(--text-primary);
   text-decoration: none;
   font-weight: 500;
   transition: color 0.3s ease;
-  cursor: pointer;
   position: relative;
 }
 
@@ -500,7 +499,7 @@ body {
   left: 0;
   width: 0;
   height: 2px;
-  background: var(--gradient-primary);
+  background: var(--accent);
   transition: width 0.3s ease;
 }
 
@@ -510,18 +509,23 @@ body {
 }
 
 .theme-toggle {
-  background: none;
-  border: none;
-  color: var(--text-secondary);
-  cursor: pointer;
-  padding: 0.5rem;
+  background: var(--bg-secondary);
+  border: 2px solid var(--border);
+  color: var(--text-primary);
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .theme-toggle:hover {
-  background-color: var(--bg-secondary);
-  color: var(--accent);
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
 }
 
 /* Main Content */
@@ -543,10 +547,8 @@ section {
   font-size: 2.5rem;
   font-weight: 700;
   margin-bottom: 1rem;
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--text-primary);
+  text-align: center;
 }
 
 .section-subtitle {
@@ -558,11 +560,10 @@ section {
 
 /* Hero Section */
 .hero {
+  background-color: var(--bg-primary);
   min-height: 100vh;
   display: flex;
   align-items: center;
-  position: relative;
-  background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
 }
 
 .hero-container {
@@ -600,22 +601,15 @@ section {
 
 .hero-title {
   font-size: 3.5rem;
-  font-weight: 800;
+  font-weight: 700;
   margin-bottom: 1rem;
-  line-height: 1.1;
-}
-
-.gradient-text {
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--text-primary);
 }
 
 .hero-subtitle {
   font-size: 1.5rem;
   color: var(--text-secondary);
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .hero-description {
@@ -636,36 +630,33 @@ section {
   align-items: center;
   gap: 0.5rem;
   padding: 0.75rem 1.5rem;
-  border: none;
   border-radius: 8px;
   font-weight: 600;
   text-decoration: none;
-  cursor: pointer;
   transition: all 0.3s ease;
-  font-size: 1rem;
+  border: none;
+  cursor: pointer;
 }
 
 .btn-primary {
-  background: var(--gradient-primary);
+  background: var(--accent);
   color: white;
-  box-shadow: var(--shadow);
 }
 
 .btn-primary:hover {
-  box-shadow: var(--shadow-hover);
+  background: var(--accent-hover);
   transform: translateY(-2px);
 }
 
 .btn-secondary {
   background: transparent;
-  color: var(--accent);
-  border: 2px solid var(--accent);
+  color: var(--text-primary);
+  border: 2px solid var(--border);
 }
 
 .btn-secondary:hover {
-  background: var(--accent);
-  color: white;
-  transform: translateY(-2px);
+  background: var(--bg-secondary);
+  border-color: var(--accent);
 }
 
 .hero-image {
@@ -689,9 +680,8 @@ section {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto;
-  position: relative;
-  z-index: 2;
+  color: white;
+  font-size: 4rem;
 }
 
 .image-placeholder {
@@ -1098,6 +1088,7 @@ section {
 
 .project-card:hover {
   box-shadow: var(--shadow-hover);
+  transform: translateY(-5px);
 }
 
 .project-image {
@@ -1231,9 +1222,6 @@ section {
   overflow-y: auto;
   position: relative;
   box-shadow: 0 8px 40px rgba(0,0,0,0.25);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 .modal-close {
@@ -1864,5 +1852,176 @@ button, .btn, .nav-link, .project-card, .skill-category, .interest-card, .social
   .slide-right .project-preview {
     margin: 0 0 1rem 0;
     transform: none;
+  }
+}
+
+/* Enhanced Custom Cursor with Magnetic Effects */
+.custom-cursor {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(circle, #3b82f6, #1d4ed8);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+  transition: all 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-shadow: 
+    0 0 20px rgba(59, 130, 246, 0.6),
+    0 0 40px rgba(59, 130, 246, 0.3),
+    inset 0 0 10px rgba(255, 255, 255, 0.2);
+  filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.5));
+}
+
+.custom-cursor.hover {
+  transform: scale(3.5);
+  background: radial-gradient(circle, #f59e0b, #d97706);
+  box-shadow: 
+    0 0 40px rgba(245, 158, 11, 0.8),
+    0 0 80px rgba(245, 158, 11, 0.4),
+    inset 0 0 20px rgba(255, 255, 255, 0.3);
+  filter: drop-shadow(0 0 20px rgba(245, 158, 11, 0.8));
+}
+
+.custom-cursor::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.3), transparent);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: cursorPulse 2s ease-in-out infinite;
+}
+
+.custom-cursor.hover::before {
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.3), transparent);
+  animation: cursorPulseHover 1s ease-in-out infinite;
+  width: 60px;
+  height: 60px;
+}
+
+/* Cursor trail effect with particles */
+.custom-cursor::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  background: #3b82f6;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: cursorTrail 0.5s ease-out infinite;
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.8);
+}
+
+.custom-cursor.hover::after {
+  background: #f59e0b;
+  animation: cursorTrailHover 0.3s ease-out infinite;
+  box-shadow: 0 0 15px rgba(245, 158, 11, 1);
+  width: 12px;
+  height: 12px;
+}
+
+/* Magnetic attraction effect */
+.custom-cursor.magnetic {
+  transition: all 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform: scale(1.2);
+  box-shadow: 
+    0 0 30px rgba(59, 130, 246, 0.8),
+    0 0 60px rgba(59, 130, 246, 0.4),
+    inset 0 0 15px rgba(255, 255, 255, 0.3);
+}
+
+.custom-cursor.magnetic.hover {
+  transform: scale(4);
+  box-shadow: 
+    0 0 50px rgba(245, 158, 11, 1),
+    0 0 100px rgba(245, 158, 11, 0.5),
+    inset 0 0 25px rgba(255, 255, 255, 0.4);
+}
+
+@keyframes cursorPulse {
+  0%, 100% { 
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.5;
+  }
+  50% { 
+    transform: translate(-50%, -50%) scale(1.8);
+    opacity: 0.2;
+  }
+}
+
+@keyframes cursorPulseHover {
+  0%, 100% { 
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.4;
+  }
+  50% { 
+    transform: translate(-50%, -50%) scale(2.5);
+    opacity: 0.1;
+  }
+}
+
+@keyframes cursorTrail {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(0.3);
+    opacity: 0;
+  }
+}
+
+@keyframes cursorTrailHover {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(0.2);
+    opacity: 0;
+  }
+}
+
+/* Cursor particle effects */
+.custom-cursor .particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: #3b82f6;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: particleFloat 1s ease-out forwards;
+}
+
+.custom-cursor.hover .particle {
+  background: #f59e0b;
+  animation: particleFloatHover 0.8s ease-out forwards;
+}
+
+@keyframes particleFloat {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(0) translateY(-20px);
+    opacity: 0;
+  }
+}
+
+@keyframes particleFloatHover {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(0) translateY(-30px);
+    opacity: 0;
   }
 }

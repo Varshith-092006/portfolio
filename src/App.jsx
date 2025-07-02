@@ -22,6 +22,130 @@ import Skills from './components/Skills';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
 
+// Custom Cursor Component
+const CustomCursor = () => {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isHovering, setIsHovering] = useState(false);
+  const [isMagnetic, setIsMagnetic] = useState(false);
+  const [particles, setParticles] = useState([]);
+
+  useEffect(() => {
+    const updateMousePosition = (e) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+      
+      // Add magnetic attraction near interactive elements
+      const interactiveElements = document.querySelectorAll('button, a, .project-card, .floating-card, .nav-link');
+      let magnetic = false;
+      
+      interactiveElements.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        const distance = Math.sqrt(
+          Math.pow(e.clientX - centerX, 2) + Math.pow(e.clientY - centerY, 2)
+        );
+        
+        if (distance < 100) {
+          magnetic = true;
+        }
+      });
+      
+      setIsMagnetic(magnetic);
+      
+      // Add particles on movement
+      if (Math.random() > 0.7) {
+        const newParticle = {
+          id: Date.now() + Math.random(),
+          x: e.clientX,
+          y: e.clientY,
+          color: isHovering ? '#f59e0b' : '#3b82f6'
+        };
+        setParticles(prev => [...prev, newParticle]);
+        
+        // Remove particle after animation
+        setTimeout(() => {
+          setParticles(prev => prev.filter(p => p.id !== newParticle.id));
+        }, 1000);
+      }
+    };
+
+    const handleMouseEnter = () => setIsHovering(true);
+    const handleMouseLeave = () => setIsHovering(false);
+
+    window.addEventListener('mousemove', updateMousePosition);
+    
+    // Add hover detection for interactive elements
+    const interactiveElements = document.querySelectorAll('button, a, .project-card, .floating-card, .nav-link');
+    interactiveElements.forEach(el => {
+      el.addEventListener('mouseenter', handleMouseEnter);
+      el.addEventListener('mouseleave', handleMouseLeave);
+    });
+
+    return () => {
+      window.removeEventListener('mousemove', updateMousePosition);
+      interactiveElements.forEach(el => {
+        el.removeEventListener('mouseenter', handleMouseEnter);
+        el.removeEventListener('mouseleave', handleMouseLeave);
+      });
+    };
+  }, [isHovering]);
+
+  return (
+    <>
+      <motion.div
+        className={`custom-cursor ${isHovering ? 'hover' : ''} ${isMagnetic ? 'magnetic' : ''}`}
+        animate={{
+          x: mousePosition.x - 10,
+          y: mousePosition.y - 10,
+          scale: isHovering ? 3.5 : isMagnetic ? 1.2 : 1,
+        }}
+        transition={{
+          type: "spring",
+          stiffness: 500,
+          damping: 28,
+          mass: 0.5
+        }}
+      />
+      
+      {/* Particle trails */}
+      {particles.map(particle => (
+        <motion.div
+          key={particle.id}
+          className="particle"
+          style={{
+            position: 'fixed',
+            left: particle.x,
+            top: particle.y,
+            backgroundColor: particle.color,
+            width: '4px',
+            height: '4px',
+            borderRadius: '50%',
+            pointerEvents: 'none',
+            zIndex: 9998,
+            boxShadow: `0 0 10px ${particle.color}`
+          }}
+          initial={{ 
+            scale: 1, 
+            opacity: 1,
+            x: 0,
+            y: 0
+          }}
+          animate={{ 
+            scale: 0,
+            opacity: 0,
+            x: (Math.random() - 0.5) * 50,
+            y: -30
+          }}
+          transition={{
+            duration: 1,
+            ease: "easeOut"
+          }}
+        />
+      ))}
+    </>
+  );
+};
+
 function App() {
   const [isDark, setIsDark] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -56,6 +180,9 @@ function App() {
 
   return (
     <div className={`app ${isDark ? 'dark' : 'light'}`}>
+      {/* Custom Cursor */}
+      <CustomCursor />
+      
       {/* Navigation */}
       <motion.nav 
         className={`navbar ${isScrolled ? 'scrolled' : ''}`}
@@ -177,7 +304,7 @@ function App() {
             <h3>Connect with me</h3>
             <div className="social-links">
               <motion.a
-                href="https://github.com/Varshith-092006"
+                href="https://github.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.2, y: -2 }}
@@ -187,7 +314,7 @@ function App() {
                 <Github size={24} />
               </motion.a>
               <motion.a
-                href="https://www.linkedin.com/in/varshith-kolli/"
+                href="https://linkedin.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.2, y: -2 }}
@@ -197,7 +324,7 @@ function App() {
                 <Linkedin size={24} />
               </motion.a>
               <motion.a
-                href="https://x.com/KolliVarshith?t=hbas-LwhfyPBBnZjoR7nUA&s=09"
+                href="https://twitter.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.2, y: -2 }}
@@ -208,9 +335,8 @@ function App() {
               </motion.a>
             </div>
           </div>
-          
           <div className="footer-section">
-            <p>&copy; 2024 Portfolio. Built with React & Framer Motion</p>
+            <p>&copy; 2024 Varshith Kolli. All rights reserved.</p>
           </div>
         </div>
       </motion.footer>
