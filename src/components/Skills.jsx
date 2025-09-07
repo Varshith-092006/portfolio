@@ -21,10 +21,10 @@ const Skills = () => {
       icon: <Code />,
       skills: [
         { name: 'React', level: 90, color: '#61DAFB' },
-        { name: 'JavaScript', level: 85, color: '#F7DF1E' },
+
         { name: 'TypeScript', level: 80, color: '#3178C6' },
         { name: 'HTML/CSS', level: 95, color: '#E34F26' },
-        { name: 'Vue.js', level: 75, color: '#4FC08D' }
+        { name: 'Next js', level: 75, color: '#4FC08D' }
       ]
     },
     {
@@ -34,8 +34,7 @@ const Skills = () => {
         { name: 'Node.js', level: 85, color: '#339933' },
         { name: 'Python', level: 80, color: '#3776AB' },
         { name: 'Express.js', level: 85, color: '#000000' },
-        { name: 'MongoDB', level: 75, color: '#47A248' },
-        { name: 'PostgreSQL', level: 70, color: '#336791' }
+        { name: 'MongoDB', level: 75, color: '#47A248' }  
       ]
     },
     {
@@ -45,7 +44,6 @@ const Skills = () => {
         { name: 'Figma', level: 80, color: '#F24E1E' },
         { name: 'Git', level: 85, color: '#F05032' },
         { name: 'Docker', level: 70, color: '#2496ED' },
-        { name: 'AWS', level: 65, color: '#FF9900' },
         { name: 'Framer Motion', level: 85, color: '#0055FF' }
       ]
     }
@@ -174,9 +172,9 @@ const Skills = () => {
           <h3>Additional Skills</h3>
           <div className="skills-tags">
             {[
-              'REST APIs', 'GraphQL', 'Redux', 'Next.js', 'Tailwind CSS',
-              'Sass', 'Webpack', 'Jest', 'Cypress', 'CI/CD',
-              'Responsive Design', 'PWA', 'SEO', 'Performance Optimization'
+              'REST APIs','Zustand', 'Next.js', 'Tailwind CSS',
+              'Sass', 'Webpack','Postmann',
+              'Responsive Design', 'Performance Optimization'
             ].map((skill, index) => (
               <motion.span
                 key={index}
