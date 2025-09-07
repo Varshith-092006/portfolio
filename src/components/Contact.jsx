@@ -87,12 +87,28 @@ const Contact = () => {
     setIsSubmitting(true);
     setSubmitStatus(null);
 
-    // Simulate API call
+    // Send email using EmailJS or your preferred service
     try {
+      // For now, we'll simulate the email sending
+      // In a real implementation, you would integrate with EmailJS, Formspree, or your backend
+      const emailData = {
+        to_email: 'kollivarshith123@gmail.com',
+        from_name: formData.name,
+        from_email: formData.email,
+        subject: formData.subject,
+        message: formData.message,
+        reply_to: formData.email
+      };
+
+      // Simulate API call - replace with actual email service
       await new Promise(resolve => setTimeout(resolve, 2000));
+      
+      console.log('Email would be sent to kollivarshith123@gmail.com with data:', emailData);
+      
       setSubmitStatus('success');
       setFormData({ name: '', email: '', subject: '', message: '' });
     } catch (error) {
+      console.error('Error sending email:', error);
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
