@@ -58,7 +58,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="hero">
+    <section className="hero">  
       <div className="hero-container">
         <motion.div
           className="hero-content"
